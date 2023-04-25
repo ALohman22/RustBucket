@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useContext } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import AuthContext from './state/AuthContext'
+
+
+import Auth from './screens/Auth'
+import Header from './componants/Header'
+import MyProjects from './screens/MyProjects'
+import Main from './screens/Main'
+import './App.css'; 
 
 function App() {
+
+  const authContext = useContext(AuthContext)
+
+ 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Header />
+    <Routes>
+      <Route path='/' element={<Main />}/>
+      
+      <Route path='/auth' element={!authContext.token ? <Auth /> : <Navigate to='/'/>}/>
+      <Route path='/myprojects' element={authContext.token ? <MyProjects /> : <Navigate to='/auth'/>}/>
+      <Route path='*' element={<Navigate to='/'/>}/>
+    </Routes>
     </div>
   );
 }
