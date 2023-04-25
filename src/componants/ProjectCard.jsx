@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = () => {
+const ProjectCard = () => {
     return (
         <div className='cardContainer'>
             <img className='cardImg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXCD5qh5a7RAtihnaqBhe4L8OHLdz3BVXTzw&usqp=CAU' />
@@ -10,4 +10,4 @@ const Card = () => {
     )
 }
 
-export default Card
+export default ProjectCard

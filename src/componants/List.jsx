@@ -25,7 +25,7 @@ const List = () => {
               url(${cardboard}) no-repeat top right / cover`,
             
           }}>
-            <form onSubmit={handleSubmit}>
+            <form className='scratchList' onSubmit={handleSubmit}>
                 <input 
                 ref={inputRef} 
                 type='text'

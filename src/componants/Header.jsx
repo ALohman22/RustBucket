@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom'
 
 import AuthContext from '../state/AuthContext'
 
-const Header = () => {
+const Header = ({scratchPad, setScratchPad}) => {
     
     const authCtx = useContext(AuthContext)
     console.log(authCtx.token)
-    // const toggleScratchPad = () => {
-    //     AuthContextProvider.setScratchPad(!AuthContextProvider.scratchPad)
-    // }
+
+    const toggleScratchPad = () => {
+        setScratchPad(!scratchPad)
+    }
 
     return (
         <div className='header'>
@@ -22,14 +23,14 @@ const Header = () => {
                 </li>
 
                 <li className='navBtn'>
-                    <button onClick={authCtx.logout}>Logout</button>
+                    <button className='logout' onClick={authCtx.logout}>Logout</button>
                 </li>
                 <li className='navBtn'>
                     <Link to='/myprojects'>My Projects</Link>
                 </li>
-                {/* <li className='navBtn' onClick={toggleScratchPad}>
+                <li className='navBtn' onClick={toggleScratchPad}>
                     Scratch Pad
-                </li> */}
+                </li>
             </ul>
             ) : (
             <ul className='links'>
@@ -41,9 +42,9 @@ const Header = () => {
                     <Link to='/auth'>Login</Link>
                 </li>
 
-                {/* <li className='navBtn' onClick={toggleScratchPad}>
+                <li className='navBtn' onClick={toggleScratchPad}>
                     Scratch Pad
-                </li> */}
+                </li>
             </ul>
             )}
         </div>
