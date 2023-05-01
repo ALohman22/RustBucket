@@ -36,6 +36,6 @@ module.exports = {
         },
         componentImg: DataTypes.STRING,
         componentTitle: DataTypes.STRING,
-        componentDescription: DataTypes.STRING,
+        componentDiscription: DataTypes.STRING,
     }),
 }

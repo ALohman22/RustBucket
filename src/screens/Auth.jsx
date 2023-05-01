@@ -1,17 +1,19 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthContext from "../state/AuthContext"
 import axios from 'axios'
 
+
 const Auth = () => {
 
 const authContext = useContext(AuthContext)
+
 const navigate = useNavigate()
 
 
 const [username, setUsername] = useState('')
 const [password, setPassword] = useState('')
-const [register, setRegister] = useState(false)
+const [register, setRegister] = useState(true)
 
 const submitHandler = (e) => {
    e.preventDefault()
@@ -26,15 +28,14 @@ const submitHandler = (e) => {
 axios.post(register ? `http://localhost:3050/login` : `http://localhost:3050/register`, body)
 .then(({data}) => {
     console.log('After Auth', data)
-    authContext.login(data.exp, data.token, data.userId)  
+    authContext.login(data.exp, data.token, data.userId, data.username)  
     setPassword('')
     setUsername('')
+
 })
-.catch(err=> console.log(err))
-
-    
+.catch(err=> console.log(err))  
 }
-
+console.log()
 
 const handleToggle = (e)=> {
     e.preventDefault()

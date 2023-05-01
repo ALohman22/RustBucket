@@ -67,6 +67,7 @@ a{
   display: flex;
   /* height: calc(100% - 75px); */
   width: 100%;
+  min-height: calc(100% - 75px);
 }
 
 .main{
@@ -75,7 +76,7 @@ a{
   align-items: center;
   /* justify-content: space-around; */
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background-color: gray;
 }
 
@@ -143,19 +144,10 @@ a{
   flex-wrap: wrap;
 }
 
-.cardContainer{
-  height: 300px;
-  width: 200px;
-  margin: 20px;
-  border: solid black 2px;
-  text-align: center;
-  background-color: whitesmoke;
-}
+/* .projects{
+  min-height: 100%;
+} */
 
-.cardImg{
-  width: 150px;
-  margin-top: 20px;
-}
 
 /* ------ScratchPad------ */
 .list{
@@ -235,3 +227,238 @@ a{
   border-radius: 5px;
 }
 
+/*------My Projects------*/
+
+
+/*------New Project------*/
+
+.mainProjects{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(100% - 75px);
+  background-color: aliceblue;
+
+}
+
+.addProject{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  height: calc(100% - 75px);
+  background-color: whitesmoke;
+}
+
+.projIn{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 90%;
+  height: 38px;
+  border-radius: 4px;
+  border: solid rgb(194, 194, 194) 1px;
+  box-sizing: border-box;
+}
+
+.css-b62m3t-container{ 
+  width: 90%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  min-height: none;
+  border-radius: 4px;
+  padding: none;
+  
+}
+/* .css-13cymwt-control{
+  width: 100%;
+  height: inherit;
+  max-height: 25px;
+  padding: none;
+  min-height: none;
+} */
+/* .css-1fdsijx-ValueContainer{
+  min-height: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+/* .css-1fdsijx-ValueContainer, .css-1hb7zxy-IndicatorsContainer{
+  padding: none;
+} */
+
+/*------Project Main------*/
+
+.myPContainer{
+  width: calc(100% - 200px);
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.myProjectsSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 200px);
+ 
+}
+
+.cardContainer{
+  height: 150px;
+  width: 400px;
+  margin: 20px;
+  border: solid black 2px;
+  text-align: center;
+  font-size: 14px;
+  background-color: whitesmoke;
+}
+
+.mainCon{
+  display: flex;
+  justify-content: space-between;
+}
+
+.description{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: black;
+  width: calc(100% - 150px);
+}
+
+.vehicleInfo{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  background-color: rgb(121, 121, 121);
+}
+
+.otherInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.imgContainer{
+  height: 150px;
+  width: 150px;
+  box-sizing: border-box;
+  border: solid rgb(187, 187, 187) 5px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardImg{
+  height: 100%;
+}
+
+.cardFooter{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 13px;
+  width: 100%;
+}
+
+.project-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  width: 500px;
+  height: 100%;
+  background-color: whitesmoke;
+}
+
+/* ------projectScreen------ */
+
+.projectScreen {
+  width: 100%;
+  height: calc(100% - 75px);
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: space-evenly; */
+  background-color: rgb(201, 178, 157);
+  overflow-x: hidden;
+}
+
+.addInputDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100% - 75px);
+}
+
+.addInputForm{
+  height: 40%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.title-info {
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 15px;
+}
+
+.projectScreenImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
+.componentsContainer {
+  width: 80%;
+  border: solid black 5px;
+  border-radius: 5px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 30px;
+}
+
+/* ------component list------ */
+
+.componentsCard{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+
+.compCardImg{
+  height: 150px;
+  width: 150px;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: solid grey 5px;
+}
+
+.carImg{
+  max-height: 100%;
+}
+
+.compInfo{
+  width: calc(100% - 150px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

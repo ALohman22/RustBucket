@@ -7,6 +7,7 @@ import Auth from './screens/Auth'
 import Header from './componants/Header'
 import MyProjects from './screens/MyProjects'
 import Main from './screens/Main'
+import ProjScreen from './screens/ProjScreen'
 import './App.css'; 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       
       <Route path='/auth' element={!authContext.token ? <Auth /> : <Navigate to='/'/>}/>
       <Route path='/myprojects' element={authContext.token ? <MyProjects /> : <Navigate to='/auth'/>}/>
+      <Route path='/projects/:id' element={authContext.token? <ProjScreen /> : <Navigate to='/auth' />} />
       <Route path='*' element={<Navigate to='/'/>}/>
     </Routes>
     </div>

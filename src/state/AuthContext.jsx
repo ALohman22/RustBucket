@@ -59,13 +59,15 @@ export const AuthContextProvider = (props) => {
         const [token, setToken] = useState(initialToken)
         const [userId, setUserId] = useState(initialId)
 
-    const login = (exp, token, userId) => {
+    const login = (exp, token, userId, username) => {
         console.log(token)
+        console.log(username)
         setToken(token)
         setUserId(userId)
         localStorage.setItem('token', token)
         localStorage.setItem('exp', exp)
         localStorage.setItem('userId', userId)
+        localStorage.setItem('username', username)
         const remainingTime = calculateRemainingTime(exp)
         logoutTimer = setTimeout(logout, remainingTime)
     }
