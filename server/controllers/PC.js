@@ -4,11 +4,12 @@ const {User, Project, Component} = require('./models')
 module.exports = {
     addComp: async (req,res) => {
         try{
-            const {componentImg, componentTitle, componentDiscription, projectId} = req.body
+            const {componentImg, componentTitle, componentDiscription, componentPrice, projectId} = req.body
             const newComp = await Component.create({
                 componentImg,
                 componentTitle,
                 componentDiscription,
+                componentPrice,
                 projectId
             })
             res.status(200).send(newComp)
@@ -39,20 +40,6 @@ module.exports = {
         }
     },
 
-    deleteProject: async (req, res) => {
-        try{
-            const {id} = req.params
-            console.log(id)
-            await Project.destroy({
-                where: {id: id}
-            })
-            res.sendStatus(200)
-        } catch(err) {
-            console.log('ERROR in deleteProject')
-            console.log(err)
-        }
-    },
-
     getComp: async (req,res) => {
         try{
             const {id} = req.params
@@ -70,9 +57,53 @@ module.exports = {
     
     },
 
+    getAllComp: async (req,res) => {
+        try{
+            const allComp = await Component.findAll()
+            res.status(200).send(allComp)
+        } catch(err) {
+            console.log('ERROR in getAllComp')
+            console.log(err)
+        }
+    },
+ 
+    deleteProject: async (req, res) => {
+        try{
+            const {id} = req.params
+            console.log(id)
+            await Project.destroy({
+                where: {id: id}
+            })
+            res.sendStatus(200)
+        } catch(err) {
+            console.log('ERROR in deleteProject')
+            console.log(err)
+        }
+    },
+
     getAllProjects: async (req,res) => {
         try{
             const projects = await Project.findAll({
+                include: [{
+                    model: User,
+                    required: true,
+                    attributes:['username']
+                }]
+            })
+            res.status(200).send(projects)
+        } catch(err) {
+            console.log('ERROR in getAllProjects')
+            console.log(err)
+        }
+    },
+
+    getUserProjects: async (req,res) => {
+        try{
+            const {id} = req.params
+            const projects = await Project.findAll({
+                where: {
+                    userId: id
+                },
                 include: [{
                     model: User,
                     required: true,

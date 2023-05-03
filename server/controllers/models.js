@@ -9,8 +9,14 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        username: DataTypes.STRING,
-        hashedPass: DataTypes.STRING
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        hashedPass: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     }),
 
     Project: sequelize.define('projects', {
@@ -20,11 +26,27 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        projectImg: DataTypes.STRING,
-        vehicleMake: DataTypes.STRING,
-        vehicleModel: DataTypes.STRING,
-        vehicleYear: DataTypes.INTEGER,
-        vehicleClass: DataTypes.STRING,
+        projectImg: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        vehicleMake: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        vehicleModel: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        vehicleYear: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+            
+        vehicleClass: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     }),
 
     Component: sequelize.define('components', {
@@ -34,8 +56,21 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        componentImg: DataTypes.STRING,
-        componentTitle: DataTypes.STRING,
-        componentDiscription: DataTypes.STRING,
+        componentImg: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        componentTitle: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        componentDiscription: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        componentPrice:{
+            type: DataTypes.FLOAT,
+            allowNull: false,
+        },
     }),
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProjectCard = ({project}) => {
+const PublicProjectCard = ({project}) => {
    
     return (
         
@@ -19,4 +19,4 @@ const ProjectCard = ({project}) => {
     )
 }
 
-export default ProjectCard
+export default PublicProjectCard

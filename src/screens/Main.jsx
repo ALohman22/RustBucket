@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useMemo, useContext, } from 'react'
 import List from '../componants/List'
+import {Link} from 'react-router-dom'
 import PublicProjectCard from '../componants/PublicProjectCard'
 import ComponentCard from '../componants/ComponentCard'
 import ProjectContext from '../state/ProjectContext'
+import AddComponentModel from '../componants/AddComponentModel'
+import {MdSearch} from 'react-icons/md'
 import axios from 'axios'
 
 const Main = ({scratchPad}) => {
@@ -10,8 +13,11 @@ const Main = ({scratchPad}) => {
     const [view, setView] = useState('Projects')
     const [vehicleClass, setVehicleClass] = useState("all")
     const [allProjects, setAllProjects] = useState([])
-    const [searchParam, setSearchParam] = useState('')
+    const [allComp, setAllComp] = useState([])
+    const [currentComp, setCurrentComp] = useState({})
+    // const [searchParam, setSearchParam] = useState('')
     const [curInput, setCurInput] = useState('')
+    const [showModel,setShowModel] = useState(false)
     
     const Projects = useContext(ProjectContext)
     const projArr = Projects.state.projects
@@ -26,76 +32,159 @@ useEffect(()=> {
     .then(res => {
         dispatch({type: 'GET_ALL', payload: res.data})
         setAllProjects(projArr)
-})
-    .catch(err=> console.log(err))
+}).catch(err=> console.log(err))
+
+    axios.get('http://localhost:3050/components')
+    .then(res=> {
+    setAllComp(res.data)
+}).catch(err=> console.log(err))
+
 },[])
 
 const filterProjects = useMemo(()=> {
-    
-    if(vehicleClass === "all" && searchParam === '') {
+    if(vehicleClass === "all" && curInput === '') {
         return projArr.map(proj => {
             return (
-                <PublicProjectCard key={proj.id} project={proj}/>
+                <Link to={`/publicProjects/${proj.id}`} key={proj.id}>
+                    <PublicProjectCard key={proj.id} project={proj}/>
+                </Link>
             ) 
         })
-    } else if (vehicleClass === "all" && searchParam !== '') {
+    } else if (vehicleClass === "all" && curInput !== '') {
         return projArr.filter(proj => {
-            return proj.vehicleMake === searchParam || proj.vehicleModel === searchParam || proj.vehicleYear === searchParam
+            return proj.vehicleMake.toLowerCase().includes(curInput.toLowerCase()) || 
+            proj.vehicleModel.toLowerCase().includes(curInput.toLowerCase()) || 
+            proj.vehicleYear.toString().includes(curInput)
         }).map(proj => {
             return (
-                <PublicProjectCard key={proj.id} project={proj}/>
+                <Link to={`/publicProjects/${proj.id}`} key={proj.id}>
+                    <PublicProjectCard key={proj.id} project={proj}/>
+                </Link>
             ) 
         })
-    } else {
+    } else if (vehicleClass !== 'all' && curInput === ''){
     return projArr.filter((proj)=> {
         return proj.vehicleClass === vehicleClass})
-        .filter((proj)=>{
-            return proj.vehicleMake === searchParam || proj.vehicleModel === searchParam || proj.vehicleYear === searchParam
-        })
         .map(proj => {
             return (
-                <PublicProjectCard key={proj.id} project={proj}/>
+                <Link to={`/publicProjects/${proj.id}`} key={proj.id}>
+                    <PublicProjectCard key={proj.id} project={proj}/>
+                </Link>
             )
         })
+    } else if (vehicleClass !== 'all' && curInput !== '') {
+        return projArr.filter((proj)=> {
+            return proj.vehicleClass === vehicleClass})
+            .filter((proj)=>{
+                return ( proj.vehicleMake.toLowerCase().includes(curInput.toLowerCase()) || 
+                proj.vehicleModel.toLowerCase().includes(curInput.toLowerCase()) || 
+                proj.vehicleYear.toString().includes(curInput) )
+            })
+            .map(proj => {
+                return (
+                    <Link to={`/publicProjects/${proj.id}`} key={proj.id}>
+                        <PublicProjectCard key={proj.id} project={proj}/>
+                    </Link>
+                )
+            })
     }
-},[vehicleClass, allProjects, searchParam])
+},[vehicleClass, allProjects, curInput])
 
-const filterByName = (e) => {
-    e.preventDefault()
-    setSearchParam(curInput)
+const filterCopies = [...new Map(allComp.map((comp) => [comp.componentTitle, comp])).values()]
+
+const allComponents = filterCopies.map((comp) => {
+    return (
+        <div className="componentAddContainer" key={comp.id}>
+        <ComponentCard 
+            comp={comp} 
+                
+             />
+        <button 
+            className='plusBtn' 
+            onClick={()=> handleAdd(comp)}
+            >+</button>
+    </div>
+    )
+})
+
+const inputFilterComponents = filterCopies.filter(comp => {
+    return ( comp.componentTitle.toLowerCase().includes(curInput.toLowerCase()) || 
+    comp.componentDiscription.toLowerCase().includes(curInput.toLowerCase()) ||
+    comp.componentPrice.toString().includes(curInput))
+    }).map((comp) => {
+        return (
+            <div className="componentAddContainer" key={comp.id}>
+            <ComponentCard 
+                comp={comp} 
+                
+                />
+            <button 
+                className='plusBtn' 
+                onClick={()=> handleAdd(comp)}
+                >+</button>
+            </div>
+        )
+    })
+
+const searching = (curInput === '') ? allComponents : inputFilterComponents
+
+const handleAdd = (comp) => {
+ setShowModel(true)
+ setCurrentComp(comp)
+}
+
+const presentModel = () => {
+    
+    return (
+        <div className='modelBackground'>
+            <div className='componentModel'>
+                <AddComponentModel comp={currentComp} setShowModel={setShowModel} showModel={showModel}/>
+            </div>
+        </div>
+    )
 }
 
     return (
         <div className='mainPage'>
         <div className='main'>
+        {showModel ? presentModel() : <h4></h4>}
             <div className='options-container'>
                 <div className='contentToggle'>
-                    <button className='contentToggleBtn' onClick={()=> setView('Projects')}>Projects</button>
-                    <button className='contentToggleBtn' onClick={()=> setView('Components')}>Components</button>
+                    <button className={view === 'Projects' ? 'focusedView' : 'contentToggleBtn'} onClick={()=> setView('Projects')}>Projects</button>
+                    <button className={view === 'Components' ? 'focusedView' : 'contentToggleBtn'} onClick={()=> setView('Components')}>Components</button>
                 </div>
-                <div className='mainSearch'>
-                    <form onSubmit={filterByName}>
-                        <input className='mainInput' onChange={(e)=> setCurInput(e.target.value)} type='text' placeholder='What are you looking for?'/>
-                        <button className='mainSubBtn'>Search</button>
-                    </form>
-                </div>
-                <div className='categories'>
-                    <button className='catBtn' value="offRoad" onClick={handleClass}>Off-Road</button>
-                    <button className='catBtn' value="muscle" onClick={handleClass}>Muscle</button>
-                    <button className='catBtn' value="oldSchoolClassic" onClick={handleClass}>Old school Classics</button>
-                    <button className='catBtn' value="raceCar" onClick={handleClass}>Race Car</button>
-                    <button className='catBtn' value="luxury" onClick={handleClass}>Luxury</button>
-                    <button className='catBtn' value="all" onClick={handleClass}>All</button>
-                </div>
+                
             </div>
             {view === 'Projects' ? (
+            <div className='pageDisplay'>
+                <div className='mainSearch'> 
+                    <input className='mainInput' onChange={(e)=> setCurInput(e.target.value)} type='text' placeholder='What are you looking for?'/>
+                    <MdSearch/>
+                </div>
+                <div className='categories'>
+                    <button className={vehicleClass === "offRoad" ? 'focusedBtn' : 'catBtn'} value="offRoad" onClick={handleClass}>Off-Road</button>
+                    <button className={vehicleClass === "muscle" ? 'focusedBtn' : 'catBtn'} value="muscle" onClick={handleClass}>Muscle</button>
+                    <button className={vehicleClass === "oldSchoolClassic" ? 'focusedBtn' : 'catBtn'} value="oldSchoolClassic" onClick={handleClass}>Old school Classics</button>
+                    <button className={vehicleClass === "raceCar" ? 'focusedBtn' : 'catBtn'} value="raceCar" onClick={handleClass}>Race Car</button>
+                    <button className={vehicleClass === "luxury" ? 'focusedBtn' : 'catBtn'} value="luxury" onClick={handleClass}>Luxury</button>
+                    <button className={vehicleClass === "all" ? 'focusedBtn' : 'catBtn'} value="all" onClick={handleClass}>All</button>
+                </div>
                 <div className='Projects'>
-                    {filterProjects}
+                    {filterProjects.length >= 1 ? filterProjects : <h2>No Projects...</h2>}
+                </div>
                 </div>
                 ) : (
-                <div className='Components'>
-                   
-                </div>
+                <div  className='pageDisplay'>   
+                    <div className='mainSearch'>
+                        <input className='mainInput' onChange={(e)=> setCurInput(e.target.value)} type='text' placeholder='What are you looking for?'/>
+                        <MdSearch/>
+                    </div>  
+                    <div className='categories'>
+                    </div>
+                    <div className='Components'>
+                    {allComp.length >=1 ? searching : <h2>no components</h2>}
+                    </div>
+                </div>    
                 )
             }
         </div>

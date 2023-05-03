@@ -21,12 +21,11 @@ const Header = ({scratchPad, setScratchPad}) => {
                 <li className='navBtn'>
                     <Link to='/'>Home</Link>
                 </li>
-
-                <li className='navBtn'>
-                    <button className='logout' onClick={authCtx.logout}>Logout</button>
-                </li>
                 <li className='navBtn'>
                     <Link to='/myprojects'>My Projects</Link>
+                </li>
+                <li className='navBtn'>
+                    <button className='logout' onClick={authCtx.logout}>Logout</button>
                 </li>
                 <li className='navBtn' onClick={toggleScratchPad}>
                     Scratch Pad

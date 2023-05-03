@@ -6,13 +6,7 @@ import ProjectContext from '../state/ProjectContext'
 
 const ProjectCard = ({project, setAddBool, addBool}) => {
     // console.log(project)
-    const deleteProject = (projId) => {
     
-        axios.delete(`http://localhost:3050/deleteProjects/${projId}`)
-        .then(
-            setAddBool(!addBool)
-        ).catch(err=> console.log(err))
-    }
    
     return (
         
@@ -30,7 +24,7 @@ const ProjectCard = ({project, setAddBool, addBool}) => {
                     <div className='otherInfo'>
                         <h3>Class: {project.vehicleClass} </h3>
                     <div className='cardFooter'>
-                        <button className='deleteBtn' onClick={()=>deleteProject(project.id)}>Delete Project</button>
+                        {/* <button className='deleteBtn' onClick={()=>deleteProject(project.id)}>Delete Project</button> */}
                         <h3>Made by: {project.user.username} </h3>
                     </div>
                     </div>

@@ -10,7 +10,9 @@ const ProjScreen = () => {
 const [componentImg, setComponentImg] = useState('')
 const [componentTitle, setComponentTitle] = useState('')
 const [componentDiscription, setComponentDiscription] = useState('')
+const [componentPrice, setComponentPrice] = useState('')
 const [currProj, setCurrProj] = useState({})
+const [toggle, setToggle] = useState(true)
 const {id} = useParams()
 // const projectCon = useContext(ProjectContext)
 // const projects = projectCon.state.projects
@@ -33,6 +35,7 @@ const handleSubmission = (e) => {
         componentImg,
         componentTitle,
         componentDiscription,
+        componentPrice,
         projectId: +id
     }
     console.log(body)
@@ -42,11 +45,11 @@ const handleSubmission = (e) => {
     console.log('component posted')    
     ).catch(err=> console.log(err))
 
-    // setComponentImg('')
-    // setComponentTitle('')
-    // setComponentDiscription('')
-
-
+    setComponentImg('')
+    setComponentTitle('')
+    componentPrice('')
+    setComponentDiscription('')
+    setToggle(!toggle)
 }
 
 
@@ -57,9 +60,25 @@ const handleSubmission = (e) => {
             <div className='addInputDiv'>
                 <form className='addInputForm' onSubmit={handleSubmission}>
                     <h3>Add Components</h3>
-                    <input type='text' placeholder='Image URL' onChange={(e)=> setComponentImg(e.target.value)}/>
-                    <input type='text' placeholder='ComponentTitle' onChange={(e)=>setComponentTitle(e.target.value)}/>
-                    <textarea placeholder='Component Discription' onChange={(e)=>setComponentDiscription(e.target.value)}/>
+                    <input 
+                        type='text' 
+                        placeholder='Image URL' 
+                        value={componentImg}
+                        onChange={(e)=> setComponentImg(e.target.value)}/>
+                    <input 
+                        type='text' 
+                        placeholder='ComponentTitle'
+                        value={componentTitle} 
+                        onChange={(e)=>setComponentTitle(e.target.value)}/>
+                      <input 
+                        type='number' 
+                        placeholder='Price'
+                        value={componentPrice} 
+                        onChange={(e)=>setComponentPrice(e.target.value)}/>
+                    <textarea 
+                        placeholder='Component Discription' 
+                        value={componentDiscription}
+                        onChange={(e)=>setComponentDiscription(e.target.value)}/>
                     <button className='addInputBtn'>Submit</button>
                 </form>
             </div>
@@ -72,7 +91,7 @@ const handleSubmission = (e) => {
                 <div className='projectScreenImg'>
                     <img className='projectScreenImg' src={currProj.projectImg}/>
                 </div>
-                <ComponentList id={id}/>
+                <ComponentList id={id} toggle={toggle}/>
             </div>
         </div>
     )

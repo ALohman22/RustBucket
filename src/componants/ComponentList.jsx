@@ -3,7 +3,7 @@ import axios from 'axios'
 import ComponentCard from './ComponentCard'
 
 
-const ComponentList = ({id}) => {
+const ComponentList = ({id, toggle}) => {
     // console.log(+id)
 const[compArr,setCompArr] = useState([])
 
@@ -14,7 +14,7 @@ const[compArr,setCompArr] = useState([])
             // console.log(res.data)
             setCompArr(res.data)
         }).catch(err=> console.log(err))
-    },[])
+    },[toggle])
 
     // console.log(compArr)
 const mapComponents = compArr.map(comp=> {

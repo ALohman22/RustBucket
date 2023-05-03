@@ -9,7 +9,8 @@ const ComponentCard = ({comp}) => {
                 </div>
                 <div className='compInfo'>
                 <h3>{comp.componentTitle}</h3>
-                <h3>{comp.componentDiscription}</h3>
+                {/* <h3>{comp.componentDiscription}</h3> */}
+                <h3>${comp.componentPrice}</h3>
                 </div>
             </div>
         </div>
