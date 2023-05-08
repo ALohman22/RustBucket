@@ -7,7 +7,9 @@ const initialState = {
     components: [],
     showModel: false,
     showAddProject: false,
-    currComp: {}
+    currComp: {},
+    currProj: {},
+    scratchList: [],
 }
 
 
@@ -23,7 +25,13 @@ const ProjectContextProvider = props => {
             case 'CURR_COMP':
                 return {...state, currComp: action.payload}
             case 'SHOW_ADD_PROJECT':
-                return {state, showAddProject: !state.showAddProject}
+                return {...state, showAddProject: !state.showAddProject}
+            case 'CURR_PROJ':
+                return {...state, currProj: action.payload}
+            case 'ADD_LIST':
+                return {...state, scratchList: [...state.scratchList, action.payload]}
+            case 'CLEAR_LIST':
+                return {...state, scratchList: []}
             default:
                 return state
         }

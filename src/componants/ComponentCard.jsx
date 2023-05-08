@@ -5,16 +5,9 @@ import ComponentContext from '../state/ComponentContext'
 
 const ComponentCard = ({comp}) => {
 
-    const {state, dispatch} = useContext(ComponentContext)
-    
-    // const refreshPage = useMemo(()=>{
-    //     dispatch({type:'PAGE_REFRESH'})
-    //     },[state.toggle])     
+    const { dispatch } = useContext(ComponentContext)  
 
-
-// console.log(state.toggle)
     const handleDelete = (id) => {
-        // console.log(id)
         Swal.fire({
             title: 'Are you sure?',
             text: 'Once deleted, you will lose this component data',
@@ -33,7 +26,6 @@ const ComponentCard = ({comp}) => {
                             'Your project has been deleted!',
                             )
                     }
-                            // refreshPage
                         ).catch(err=> console.log(err))    
                         }
                     })

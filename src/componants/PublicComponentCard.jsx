@@ -1,9 +1,12 @@
 import {useContext} from 'react'
 import ProjectContext from '../state/ProjectContext'
+import AuthContext from '../state/AuthContext'
 
 const PublicComponentCard = ({comp}) => {  
 
-const {state, dispatch} = useContext(ProjectContext)
+const { dispatch } = useContext(ProjectContext)
+const authContext = useContext(AuthContext)
+
 const handleAdd = (comp) => {
     dispatch({type:'SHOW_MODEL'})
     dispatch({type:'CURR_COMP', payload: comp})
@@ -19,7 +22,7 @@ const handleAdd = (comp) => {
             <h3>{comp.componentDiscription}</h3>
             <h3>${comp.componentPrice}</h3>
             </div>
-            <button className='pubCompDeleteBtn' onClick={()=>handleAdd(comp)}>Add to Project</button>
+            {authContext.token ? <button className='pubCompDeleteBtn' onClick={()=>handleAdd(comp)}>Add to Project</button> : <h1></h1>}
         </div>
     )
 }

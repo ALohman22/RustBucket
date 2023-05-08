@@ -8,6 +8,7 @@ import AddComponentModel from '../componants/AddComponentModel'
 import {MdSearch} from 'react-icons/md'
 import Select from 'react-select'
 import axios from 'axios'
+import ComponentContext from '../state/ComponentContext'
 
 const Main = ({scratchPad}) => {
 
@@ -22,7 +23,7 @@ const Main = ({scratchPad}) => {
     const Projects = useContext(ProjectContext)
     const projArr = Projects.state.projects
     const {state, dispatch } = useContext(ProjectContext)
-  
+    const {dispatch: dis} = useContext(ComponentContext)
 const handleClass = (e) => {
     setVehicleClass(e.target.value)
 }
@@ -31,6 +32,7 @@ useEffect(()=> {
     axios.get('http://localhost:3050/projects')
     .then(res => {
         dispatch({type: 'GET_ALL', payload: res.data})
+        dispatch({type: 'TOGGLE', payload: 'home'})
         setAllProjects(projArr)
 }).catch(err=> console.log(err))
 

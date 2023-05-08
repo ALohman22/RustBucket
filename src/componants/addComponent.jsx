@@ -8,8 +8,8 @@ const AddComponent = ({id}) => {
     const [componentTitle, setComponentTitle] = useState('')
     const [componentDiscription, setComponentDiscription] = useState('')
     const [componentPrice, setComponentPrice] = useState('')
-    const {state,dispatch} = useContext(ComponentContext)
-// console.log(state.toggle)
+    const {dispatch} = useContext(ComponentContext)
+
 
     const handleSubmission = (e) => {
         e.preventDefault()
@@ -24,7 +24,6 @@ const AddComponent = ({id}) => {
     
         axios.post('http://localhost:3050/components', body)
         .then(()=>{
-            console.log('component posted')    
             setComponentImg('')
             setComponentTitle('')
             setComponentPrice('')
@@ -37,7 +36,6 @@ const AddComponent = ({id}) => {
 
     const cancelBtn = () => {
         dispatch({type: 'ADD_COMPONENT_TOGGLE'})
-        // console.log(state.screenView)
     }
 
 

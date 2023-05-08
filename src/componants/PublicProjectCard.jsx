@@ -1,7 +1,6 @@
 import React from 'react'
 
 const PublicProjectCard = ({project}) => {
-    // console.log(project.vehicleClass.split('-'))
    const pClass = project.vehicleClass.split('-')
     return (
         

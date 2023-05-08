@@ -10,7 +10,6 @@ const ProjectCard = ({project, setAddBool, addBool}) => {
     const {state} = useContext(ComponentContext)
 
     const handleDelete = (id) => {
-        console.log(id)
         Swal.fire({
             title: 'Are you sure?',
             text: 'Once deleted, you will lose all your project data',

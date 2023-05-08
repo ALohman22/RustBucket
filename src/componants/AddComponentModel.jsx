@@ -8,7 +8,6 @@ const AddComponentModel = ({comp}) => {
     const userId = localStorage.getItem('userId')
     const [userProj, setUserProj] = useState([])
     const {state, dispatch} = useContext(ProjectContext)
-    // console.log(state.currComp)
 
 useEffect(()=> {
     axios.get(`http://localHost:3050/userProjects/${userId}`)
@@ -29,8 +28,6 @@ const showProjects = userProj.map((proj)=>{
 })
 
 const addComp = (comp, projId) => {
-//  console.log(comp)
-//  console.log(projId)
     const body = {
         componentImg: comp.componentImg,
         componentTitle: comp.componentTitle,
@@ -38,7 +35,6 @@ const addComp = (comp, projId) => {
         componentPrice: comp.componentPrice,
         projectId: +projId
     }
-    // console.log(body)
     
     axios.post('http://localhost:3050/components', body)
     .then(res => {

@@ -8,8 +8,6 @@ const PubComponentList = ({id}) => {
 const[compArr,setCompArr] = useState([])
 const {state} = useContext(ComponentContext)
 
-
-console.log(state.toggle)
     useEffect(()=> {
         axios.get(`http://localhost:3050/components/${id}`)
         .then(res=>{

@@ -2,11 +2,14 @@ import React, { useState, useContext, } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthContext from "../state/AuthContext"
 import axios from 'axios'
+import ComponentContext from '../state/ComponentContext'
+import Swal from 'sweetalert2'
 
 
 const Auth = () => {
 
 const authContext = useContext(AuthContext)
+const {dispatch} = useContext(ComponentContext)
 
 const navigate = useNavigate()
 
@@ -33,7 +36,14 @@ axios.post(register ? `http://localhost:3050/login` : `http://localhost:3050/reg
     setUsername('')
 
 })
-.catch(err=> console.log(err))  
+.catch(err=> {
+    register ? 
+    (
+        Swal.fire("Please make sure your username or password is correct")
+    ) : (
+        Swal.fire("That username Already exists!")
+    )
+    console.log(err)})  
 }
 console.log()
 
@@ -60,7 +70,7 @@ const handleToggle = (e)=> {
                 />
                 <input 
                     className='signInInput' 
-                    type='text' 
+                    type='password' 
                     placeholder='Password'
                     onChange={(e)=> setPassword(e.target.value)}
                     value={password}
@@ -70,7 +80,7 @@ const handleToggle = (e)=> {
                 </button>
 
                 <div className='registerToggle'>
-                    {register ? <p>Dont have a login? Register</p> : <p>Already registered? Login</p>}
+                    {register ? <p>Don't have a login? Register</p> : <p>Already registered? Login</p>}
                     <button className='registerChange' 
                         onClick={handleToggle}>here
                     </button>
