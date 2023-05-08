@@ -2,27 +2,27 @@ import React, { useState, useEffect, useMemo, useContext, } from 'react'
 import List from '../componants/List'
 import {Link} from 'react-router-dom'
 import PublicProjectCard from '../componants/PublicProjectCard'
-import ComponentCard from '../componants/ComponentCard'
+import PublicComponentCard from '../componants/PublicComponentCard'
 import ProjectContext from '../state/ProjectContext'
 import AddComponentModel from '../componants/AddComponentModel'
 import {MdSearch} from 'react-icons/md'
+import Select from 'react-select'
 import axios from 'axios'
 
 const Main = ({scratchPad}) => {
 
     const [view, setView] = useState('Projects')
-    const [vehicleClass, setVehicleClass] = useState("all")
+    const [vehicleClass, setVehicleClass] = useState({value:"all", label: "All"})
     const [allProjects, setAllProjects] = useState([])
     const [allComp, setAllComp] = useState([])
     const [currentComp, setCurrentComp] = useState({})
-    // const [searchParam, setSearchParam] = useState('')
     const [curInput, setCurInput] = useState('')
     const [showModel,setShowModel] = useState(false)
     
     const Projects = useContext(ProjectContext)
     const projArr = Projects.state.projects
-    const { dispatch } = useContext(ProjectContext)
-    // console.log(allProjects)
+    const {state, dispatch } = useContext(ProjectContext)
+  
 const handleClass = (e) => {
     setVehicleClass(e.target.value)
 }
@@ -42,16 +42,16 @@ useEffect(()=> {
 },[])
 
 const filterProjects = useMemo(()=> {
-    if(vehicleClass === "all" && curInput === '') {
-        return projArr.map(proj => {
+    if(vehicleClass?.value === "all" && curInput === '') {
+        return projArr?.map(proj => {
             return (
                 <Link to={`/publicProjects/${proj.id}`} key={proj.id}>
-                    <PublicProjectCard key={proj.id} project={proj}/>
+                    <PublicProjectCard key={proj.id} project={proj} />
                 </Link>
             ) 
         })
-    } else if (vehicleClass === "all" && curInput !== '') {
-        return projArr.filter(proj => {
+    } else if (vehicleClass?.value === "all" && curInput !== '') {
+        return projArr?.filter(proj => {
             return proj.vehicleMake.toLowerCase().includes(curInput.toLowerCase()) || 
             proj.vehicleModel.toLowerCase().includes(curInput.toLowerCase()) || 
             proj.vehicleYear.toString().includes(curInput)
@@ -62,9 +62,9 @@ const filterProjects = useMemo(()=> {
                 </Link>
             ) 
         })
-    } else if (vehicleClass !== 'all' && curInput === ''){
-    return projArr.filter((proj)=> {
-        return proj.vehicleClass === vehicleClass})
+    } else if (vehicleClass?.value !== 'all' && curInput === ''){
+    return projArr?.filter((proj)=> {
+        return proj.vehicleClass === vehicleClass.value})
         .map(proj => {
             return (
                 <Link to={`/publicProjects/${proj.id}`} key={proj.id}>
@@ -72,9 +72,9 @@ const filterProjects = useMemo(()=> {
                 </Link>
             )
         })
-    } else if (vehicleClass !== 'all' && curInput !== '') {
-        return projArr.filter((proj)=> {
-            return proj.vehicleClass === vehicleClass})
+    } else if (vehicleClass?.value !== 'all' && curInput !== '') {
+        return projArr?.filter((proj)=> {
+            return proj.vehicleClass === vehicleClass.value})
             .filter((proj)=>{
                 return ( proj.vehicleMake.toLowerCase().includes(curInput.toLowerCase()) || 
                 proj.vehicleModel.toLowerCase().includes(curInput.toLowerCase()) || 
@@ -92,18 +92,20 @@ const filterProjects = useMemo(()=> {
 
 const filterCopies = [...new Map(allComp.map((comp) => [comp.componentTitle, comp])).values()]
 
+const handleAdd = (comp) => {
+    dispatch({type:'SHOW_MODEL'})
+    dispatch({type:'CURR_COMP', payload: comp})
+    // setShowModel(true)
+    // setCurrentComp(comp)
+   }
+
 const allComponents = filterCopies.map((comp) => {
     return (
-        <div className="componentAddContainer" key={comp.id}>
-        <ComponentCard 
+        <PublicComponentCard
+            key={comp.id}
             comp={comp} 
-                
-             />
-        <button 
-            className='plusBtn' 
-            onClick={()=> handleAdd(comp)}
-            >+</button>
-    </div>
+            handleAdd={handleAdd}    
+        />
     )
 })
 
@@ -113,32 +115,31 @@ const inputFilterComponents = filterCopies.filter(comp => {
     comp.componentPrice.toString().includes(curInput))
     }).map((comp) => {
         return (
-            <div className="componentAddContainer" key={comp.id}>
-            <ComponentCard 
-                comp={comp} 
-                
-                />
-            <button 
-                className='plusBtn' 
-                onClick={()=> handleAdd(comp)}
-                >+</button>
-            </div>
+            <PublicComponentCard
+                key={comp.id}
+                comp={comp}
+                handleAdd={handleAdd}
+            />
         )
     })
 
 const searching = (curInput === '') ? allComponents : inputFilterComponents
 
-const handleAdd = (comp) => {
- setShowModel(true)
- setCurrentComp(comp)
-}
+const classOptions = [
+    {value: "Off-Road", label: "Off Road"},
+    {value: "Muscle", label: "Muscle"},
+    {value: "Old-School-Classic", label: "Old School Classic"},
+    {value: "Race-Car", label: "Race Car"},
+    {value: "Luxury", label: "Luxury"},
+    {value:"all", label: "All"}
+]
 
 const presentModel = () => {
     
     return (
         <div className='modelBackground'>
             <div className='componentModel'>
-                <AddComponentModel comp={currentComp} setShowModel={setShowModel} showModel={showModel}/>
+                <AddComponentModel comp={state.currComp}/>
             </div>
         </div>
     )
@@ -147,42 +148,49 @@ const presentModel = () => {
     return (
         <div className='mainPage'>
         <div className='main'>
-        {showModel ? presentModel() : <h4></h4>}
-            <div className='options-container'>
+        {state.showModel ? presentModel() : <h4></h4>}
+        <div className='options-container'>
+            <div className='mainSearch'> 
                 <div className='contentToggle'>
                     <button className={view === 'Projects' ? 'focusedView' : 'contentToggleBtn'} onClick={()=> setView('Projects')}>Projects</button>
                     <button className={view === 'Components' ? 'focusedView' : 'contentToggleBtn'} onClick={()=> setView('Components')}>Components</button>
                 </div>
-                
-            </div>
-            {view === 'Projects' ? (
-            <div className='pageDisplay'>
-                <div className='mainSearch'> 
+                <div className='mainInputContainer'>
                     <input className='mainInput' onChange={(e)=> setCurInput(e.target.value)} type='text' placeholder='What are you looking for?'/>
                     <MdSearch/>
                 </div>
-                <div className='categories'>
-                    <button className={vehicleClass === "offRoad" ? 'focusedBtn' : 'catBtn'} value="offRoad" onClick={handleClass}>Off-Road</button>
-                    <button className={vehicleClass === "muscle" ? 'focusedBtn' : 'catBtn'} value="muscle" onClick={handleClass}>Muscle</button>
-                    <button className={vehicleClass === "oldSchoolClassic" ? 'focusedBtn' : 'catBtn'} value="oldSchoolClassic" onClick={handleClass}>Old school Classics</button>
-                    <button className={vehicleClass === "raceCar" ? 'focusedBtn' : 'catBtn'} value="raceCar" onClick={handleClass}>Race Car</button>
-                    <button className={vehicleClass === "luxury" ? 'focusedBtn' : 'catBtn'} value="luxury" onClick={handleClass}>Luxury</button>
-                    <button className={vehicleClass === "all" ? 'focusedBtn' : 'catBtn'} value="all" onClick={handleClass}>All</button>
-                </div>
+                {view === 'Projects' ? (
+                    <div className='selectContainer'>
+                    <Select 
+                        name="select"
+                        options={classOptions}
+                        value={vehicleClass}
+                        placeholder='Browse Categories'
+                        onChange={setVehicleClass}
+                        theme={(theme)=> ({
+                            ...theme,
+                            colors:{
+                                ...theme.colors,
+                                text: 'black',
+                                primary25: 'rgb(172, 165, 154)',
+                                primary: 'rgb(172, 165, 154)'
+                            }
+                        })}
+                        />
+                    </div>
+                ) : (<div className='selectContainer'></div>)}
+            </div>
+        </div>
+            {view === 'Projects' ? (
+            <div className='pageDisplay'>
                 <div className='Projects'>
-                    {filterProjects.length >= 1 ? filterProjects : <h2>No Projects...</h2>}
+                    {filterProjects?.length >= 1 ? filterProjects : <h2>No Projects...</h2>}
                 </div>
                 </div>
                 ) : (
                 <div  className='pageDisplay'>   
-                    <div className='mainSearch'>
-                        <input className='mainInput' onChange={(e)=> setCurInput(e.target.value)} type='text' placeholder='What are you looking for?'/>
-                        <MdSearch/>
-                    </div>  
-                    <div className='categories'>
-                    </div>
                     <div className='Components'>
-                    {allComp.length >=1 ? searching : <h2>no components</h2>}
+                    {allComp.length >=1 ? searching : <h2>No Components...</h2>}
                     </div>
                 </div>    
                 )

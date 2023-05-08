@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const {sequelize} = require('./util/database')
 const {User, Project, Component} = require('./controllers/models')
-const {addComp, getComp, getAllComp, getAllProjects, getUserProjects, getOneProject, deleteProject, addProject, getProject} = require('./controllers/PC')
+const {addComp, getComp, getAllComp, deleteComponent, getAllProjects, getUserProjects, getOneProject, deleteProject, addProject} = require('./controllers/PC')
 const { login, register } = require('./controllers/auth') 
 
 
@@ -28,7 +28,8 @@ server.get('/userProjects/:id', getUserProjects)
 server.get('/components/:id', getComp)
 server.get('/components', getAllComp)
 
-server.delete('/deleteProjects/:id', deleteProject)
+server.delete('/deleteProject/:id', deleteProject)
+server.delete('/deleteComponent/:id', deleteComponent)
 
 sequelize.sync()
 .then(() =>{

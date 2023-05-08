@@ -1,7 +1,8 @@
 import React from 'react'
 
 const PublicProjectCard = ({project}) => {
-   
+    // console.log(project.vehicleClass.split('-'))
+   const pClass = project.vehicleClass.split('-')
     return (
         
         <div className='cardContainer'>
@@ -11,8 +12,8 @@ const PublicProjectCard = ({project}) => {
                 </div>
                 <div className='description'>
                     <h3>{project.vehicleYear} {project.vehicleMake} {project.vehicleModel}</h3>
-                    <h3>{project.vehicleClass}</h3>
-                    {/* <h3>Made by: {project.user.username}</h3> */}
+                    <h3>{pClass}</h3>
+                    <h3>Made by: {project.user.username}</h3>
                 </div>
             </div>
         </div>

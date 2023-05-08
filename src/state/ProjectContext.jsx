@@ -1,11 +1,13 @@
 import { createContext, useReducer} from "react";
-import axios from 'axios'
 
 
 
 const initialState = {
     projects: [],
-    components: []
+    components: [],
+    showModel: false,
+    showAddProject: false,
+    currComp: {}
 }
 
 
@@ -16,8 +18,12 @@ const ProjectContextProvider = props => {
         switch(action.type) {
             case 'GET_ALL':
                 return {...state, projects: action.payload}
-            // case 'ADD_PROJECT':
-            //     return {...state, projects: [...state.projects, action.payload]}
+            case 'SHOW_MODEL':
+                return {...state, showModel: !state.showModel}
+            case 'CURR_COMP':
+                return {...state, currComp: action.payload}
+            case 'SHOW_ADD_PROJECT':
+                return {state, showAddProject: !state.showAddProject}
             default:
                 return state
         }

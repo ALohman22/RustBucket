@@ -20,16 +20,15 @@ module.exports = {
     },
 
     addProject: async (req,res) => {
-        // const {proImg, VhMake, VhModel, VhYear, VhClass} = req.body
         try{
-            const { projectImg, vehicleMake, vehicleModel, vehicleYear, vehicleClass, userId } = req.body
-        //    console.log(userId)
+            const { projectImg, vehicleMake, vehicleModel, vehicleYear, vehicleClass, isPublic, userId } = req.body
             const newProj = await Project.create({
                 projectImg,
                 vehicleMake,
                 vehicleModel,
                 vehicleYear,
                 vehicleClass,
+                isPublic,
                 userId 
             })
             res.status(200).send(newProj)
@@ -66,6 +65,20 @@ module.exports = {
             console.log(err)
         }
     },
+
+    deleteComponent: async (req,res) => {
+        try{
+            const {id} = req.params
+            console.log(id)
+            await Component.destroy({
+                where: {id: id}
+            })
+            res.sendStatus(200)
+        } catch(err) {
+            console.log('ERROR in deleteComponent')
+            console.log(err)
+        }
+    },
  
     deleteProject: async (req, res) => {
         try{
@@ -84,6 +97,9 @@ module.exports = {
     getAllProjects: async (req,res) => {
         try{
             const projects = await Project.findAll({
+                where: {
+                    isPublic: true
+                },
                 include: [{
                     model: User,
                     required: true,

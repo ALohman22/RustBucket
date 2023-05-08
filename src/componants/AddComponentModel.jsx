@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import PublicProjectCard from './PublicProjectCard'
 import Swal from 'sweetalert2'
+import ProjectContext from '../state/ProjectContext'
 
-const AddComponentModel = ({comp, showModel, setShowModel}) => {
-    // console.log(comp)
+const AddComponentModel = ({comp}) => {
     const userId = localStorage.getItem('userId')
     const [userProj, setUserProj] = useState([])
+    const {state, dispatch} = useContext(ProjectContext)
+    // console.log(state.currComp)
 
 useEffect(()=> {
     axios.get(`http://localHost:3050/userProjects/${userId}`)
     .then(res=> {
         setUserProj(res.data)
-        // console.log(res.data)
     }
     ).catch(err=> console.log(err))
 },[])
@@ -37,15 +38,16 @@ const addComp = (comp, projId) => {
         componentPrice: comp.componentPrice,
         projectId: +projId
     }
-    console.log(body)
+    // console.log(body)
     
     axios.post('http://localhost:3050/components', body)
     .then(res => {
-        console.log('Project Posted!')
+        
+        dispatch({type:'PAGE_REFRESH'})
         Swal.fire('Component added to your Project!')
     }).catch(err => console.log(err))
 
-    setShowModel(!showModel)
+    dispatch({type:'SHOW_MODEL'})
     }
 
 
@@ -56,7 +58,7 @@ const addComp = (comp, projId) => {
             <div className='modelMain'>
                 {showProjects}
             </div>
-                <button className='cancelBtn' onClick={()=> setShowModel(false)}>Cancel</button>
+                <button className='cancelBtn' onClick={()=> dispatch({type:'SHOW_MODEL'})}>Cancel</button>
         </div>
     )
 }

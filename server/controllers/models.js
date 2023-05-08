@@ -42,7 +42,9 @@ module.exports = {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-            
+        isPublic: {
+            type: DataTypes.BOOLEAN,
+        },    
         vehicleClass: {
             type: DataTypes.STRING,
             allowNull: false,

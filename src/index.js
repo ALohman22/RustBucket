@@ -4,6 +4,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthContextProvider } from './state/AuthContext';
 import { ProjectContextProvider } from './state/ProjectContext'
+import { ComponentContextProvider } from './state/ComponentContext';
 // import { Provider } from 'react-redux'
 // import store from './redux/store'
 
@@ -11,15 +12,17 @@ import { ProjectContextProvider } from './state/ProjectContext'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+        <ComponentContextProvider>
     <AuthContextProvider>
       <ProjectContextProvider>
-        <BrowserRouter>
+          <BrowserRouter>
         {/* <Provider store={store}> */}
             <App />
         {/* </Provider>  */}
-        </BrowserRouter>
+          </BrowserRouter>
       </ProjectContextProvider>
     </AuthContextProvider>
+        </ComponentContextProvider>
   </React.StrictMode>
 
 );

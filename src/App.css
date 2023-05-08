@@ -7,6 +7,13 @@ body{
   margin: 0px;
   padding: 0px;
 }
+a{
+  height: inherit;
+  width: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 @font-face {
   font-family: 'Caveat';
@@ -49,11 +56,16 @@ body{
 
 .navBtn{
   list-style-type: none;
-  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 50px;
 }
 
 li:hover{
-  background-color: rgb(75, 75, 75);
+  background-color: rgb(172, 165, 154);
+  border-radius: 3px;
   cursor: pointer;
 }
 
@@ -63,14 +75,20 @@ a{
  }
 
 /* ------HomeScreen------ */
+
+.mainPage::-webkit-scrollbar{
+  display: none;
+}
+
 .mainPage{
   display: flex;
   /* height: calc(100% - 75px); */
   width: 100%;
   overflow-x: hidden;
-  background-color: grey;
-  height: calc(100% - 75px);
-
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: whitesmoke;
+  height: calc(100% - 75px)
 }
 
 .main{
@@ -84,9 +102,10 @@ a{
 
 .options-container{
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: 30px;
+  width: 80%;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .contentToggle{
@@ -94,7 +113,7 @@ a{
   justify-content: space-evenly;
   align-items: center;
   height: 50px;
-  width: 300px;
+  width: 25%;
 }
 
 .pageDisplay{
@@ -105,61 +124,91 @@ a{
 }
 
 .contentToggleBtn{
-  padding: 15px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 3px;
 }
 
 .focusedView{
-  padding: 15px;
-  border-radius: 5px;
-  background-color: rgb(82, 69, 50);
+  padding: 10px;
+  border-radius: 3px;
+  background-color: rgb(172, 165, 154);
 }
 
 .mainSearch{
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   margin: 30px;
-  height: 40px;
-  width: 300px;
-  background-color: rgb(70, 50, 50);
+  height: 60px;
+  width: 100%;
+  background-color: rgb(207, 206, 206);
   /* border: solid black 2px; */
-  border-radius: 20px;
+  border-radius: 10px;
+}
+
+.selectContainer{
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.mainInputContainer{
+  height: 38px;
+  width: 50%;
+  padding-right: 10px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  background-color: whitesmoke;
 }
 
 .mainInput{
   box-sizing: border-box;
-  height: 25px;
-  width: 80%;
+  max-height: 100%;
+  height: 38px;
+  width: 100%;
   margin-right: 10px;
-  border-radius: 3px;
+  font-size: 90%;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  border: none;
+  padding: none;
+  background-color: whitesmoke;
 } 
 
-.mainSubBtn{
-  height: 25px;
+input[type="text" i]:focus{
+  box-sizing: border-box;
+  outline: 0px;
+ 
 }
 
-.categories{
-  margin: 30px;
-  display: flex;
-  justify-content: space-evenly;
-  width: 90%;
-  height: 75px;
+.mainInput:focus{
+  border: none;
+  padding: none;
+  box-sizing: border-box;
+  max-height: 100%;
+  height: 38px;
+  width: 100%;
+  margin-right: 10px;
+  font-size: 90%;
 }
 
 .catBtn{
-  padding: 15px;
+ height: 38px;
   border-radius: 5px;
   min-width: 100px;
 }
 
 .contentToggleBtn:hover, .mainSubBtn:hover,
 .catBtn:hover{
-  background-color: rgb(82, 69, 50);
+  background-color: rgb(172, 165, 154);
 }
 
 .focusedBtn{
-  background-color: rgb(82, 69, 50);
+  background-color: rgb(172, 165, 154);
   padding: 15px;
   border-radius: 5px;
   min-width: 100px;
@@ -186,11 +235,6 @@ a{
   color: rgb(47, 173, 79);
   border: solid rgb(47, 173, 79) 6px;
 }
-
-/* .projects{
-  min-height: 100%;
-} */
-
 
 /* ------ScratchPad------ */
 .list{
@@ -280,7 +324,7 @@ a{
   justify-content: space-between;
   width: 100%;
   height: calc(100% - 75px);
-  background-color: aliceblue;
+  background-color: whitesmoke;
 
 }
 
@@ -315,66 +359,75 @@ a{
 
 /*------Project Main------*/
 .cardDeleteContainer{
-  display: flex;
-  align-items: center;
+  display: grid;
+  /* align-items: center; */
   margin: none;
 }
 
-.xBtn{
-  box-sizing: border-box;
-  border: solid black 6px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  height: 80%;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.xBtn:hover{
-  color: rgb(226, 4, 4);
-  border: solid red 6px;
+.myPContainer::-webkit-scrollbar{
+  display: none;
 }
 
 .myPContainer{
-  width: calc(100% - 200px);
+  width: 100%;
   display: flex;
   justify-content: center;
   overflow-x: hidden;
-}
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+} 
 
 .myProjectsSection{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   width: calc(100% - 200px);
  
 }
 
 .cardContainer{
   box-sizing: border-box;
-  height: 150px;
-  width: 400px;
+  height: 300px;
+  width: 200px;
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 20px;
-  border: solid black 2px;
+  border-radius: 8px;
+  overflow: hidden;
   text-align: center;
   font-size: 14px;
   background-color: whitesmoke;
 }
 
-.cardContainer:hover{
+/* .cardContainer:hover{
   box-sizing: border-box;
   border: solid red 2px;
   opacity: .7;
+} */
+
+.mainConMy{
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
 }
 
 .mainCon{
   box-sizing: border-box;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
+}
+
+.mainCon:hover{
+  box-sizing: border-box;
+  border: solid black 4px;
 }
 
 .description{
@@ -384,32 +437,80 @@ a{
   align-items: center;
   font-size: 10px;
   color: black;
-  width: calc(100% - 150px);
+  background-color: rgb(207, 207, 207);
+  width: 100%;
 }
 
 .vehicleInfo{
   display: flex;
   width: 100%;
   justify-content: space-around;
-  background-color: rgb(121, 121, 121);
 }
 
 .otherInfo {
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  padding: 10px;
+}
+
+.cardFooter{
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
   margin-bottom: 5px;
+}
+
+.ProjLink{
+  box-sizing: border-box;
+  border: solid black 2px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 40px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: whitesmoke;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.ph4{
+  margin: 0px;
+}
+
+.ProjLink:hover{
+  border: solid rgb(41, 226, 4) 2px;
+}
+
+.xBtn{
+  box-sizing: border-box;
+  border: solid black 2px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 40px;
+  width: 40px;
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 30px;
+}
+
+.xBtn:hover{
+  color: rgb(226, 4, 4);
+  border: solid red 2px;
 }
 
 .imgContainer{
   box-sizing: border-box;
   height: 100%;
-  width: 150px;
+  width: 100%;
   box-sizing: border-box;
-  border: solid rgb(187, 187, 187) 5px;
-  overflow-y: hidden;
   overflow-x: hidden;
   display: flex;
   justify-content: center;
@@ -417,7 +518,6 @@ a{
 }
 
 .cardImg{
-  box-sizing: border-box;
   height: 100%;
 }
 
@@ -431,74 +531,97 @@ a{
 
 .project-container{
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   padding-top: 30px;
-  width: 500px;
+  width: 100%;
   height: 100%;
+  border-top: solid lightgray 2px;
   background-color: whitesmoke;
 }
 
 /* ------projectScreen------ */
 
+.projectScreen::-webkit-scrollbar {
+  display: none;
+}
+
 .projectScreen {
   width: 100%;
   height: calc(100% - 75px);
   display: flex;
-  /* align-items: center; */
-  /* justify-content: space-evenly; */
-  background-color: rgb(201, 178, 157);
+  background-color: whitesmoke;
   overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .addInputDiv{
+  position: fixed;
+  right: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100% - 75px);
+  width: 30%;
+  min-width: 220px;
+  background-color: rgb(141, 141, 141);
+  /* height: 400px; */
+  padding: 20px;
+  border-bottom-left-radius: 10px;
 }
 
 .addInputForm{
-  height: 40%;
-  width: 90%;
+  height: 500px;
+  width: 95%;
+  min-width: 200px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin-left: 10px;
+ 
+}
+
+.addInputBtn{
+    width: 80px;
+    height: 30px;
+}
+
+.compIn{
+  height: 30px;
+  width: 100%;
+}
+
+.compTx{
+  width: 100%;
+  height: 60px;
 }
 
 .title-info {
   display: flex;
-  width: 80%;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 15px;
+  justify-content: space-around;
+  width: 90%;
 }
 
-.projectScreenImg {
+.projectScreenImg{
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80%;
 }
 
-.componentsContainer {
-  width: 80%;
-  border: solid black 5px;
+.projectScreenImg2 {
+  box-sizing: border-box;
+  width: 100%;
   border-radius: 5px;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: 30px;
 }
 
 /* ------component list------ */
 
 .componentAddContainer{
-  height: 150px;
+  min-height: 150px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -510,23 +633,74 @@ a{
   opacity: .7;
 }
 
-.componentsCard{
-  display: flex;
-  width: 100%;
-  height: 100%;
-  color: black;
+.componentContent::-webkit-scrollbar {
+  display: none;
 }
 
-.compCardImg{
-  height: 100%;
-  width: 150px;
-  overflow: hidden;
+.componentContent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.componentsContainer {
   box-sizing: border-box;
-  border: solid grey 5px;
+  width: 90%;
+  border: solid black 5px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.compCardContainer{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.total{
+  background-color: rgb(70, 50, 50);
+  color: whitesmoke;
+  height: 50px;
+  min-width: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border-radius: 10px; */
+  border-radius: 20px;
+}
+
+.componentsCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  height: 300px;
+  color: black;
+  margin: 10px;
+  border-radius: 3px;
+  background-color: rgb(207, 207, 207);
+}
+
+.compCardImg{
+  box-sizing: border-box;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(153, 153, 153);
 }
 
 .carImg{
@@ -534,10 +708,30 @@ a{
 }
 
 .compInfo{
-  width: calc(100% - 150px);
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.compDeleteBtn{
+  width: 50%;
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.pubCompDeleteBtn{
+  width: 60%;
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.compDeleteBtn:hover{
+  border: solid red 2px;
 }
 
 /* ------ComponentModal------ */
@@ -553,8 +747,9 @@ a{
 }
 
 .componentModel{
-  height: 500px;
+  height: 600px;
   width: 500px;
+  min-width: 300px;
   border: solid rgb(0, 0, 0) 5px;
   border-radius: 20px;
 }
@@ -568,8 +763,12 @@ a{
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: rgb(161, 142, 87);
+  background-color: whitesmoke;
   border-radius: 15px;
+}
+
+.modelMain::-webkit-scrollbar {
+  display: none;
 }
 
 .modelMain{
@@ -580,14 +779,82 @@ a{
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: rgb(139, 109, 84);
+  background-color: rgb(168, 168, 168);
   border: solid rgb(0, 0, 0) 5px;
   border-radius: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   overflow-x: hidden;
 }
 
 .cancelBtn{
+  box-sizing: border-box;
   margin: 20px;
-  padding: 10px;
+  padding: 20px;
+  background-color: rgb(216, 216, 216);
+  border:  black solid 3px;
   border-radius: 10px;
 }
+
+.cancelBtn:hover{
+  box-sizing: border-box;
+  border: red solid 3px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .options-container{
+    height: fit-content;
+  }
+  
+  .mainSearch{
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+  }
+
+  .contentToggle{
+    width: 80%;
+    height: auto;
+    justify-content: space-between;
+  }
+
+  .focusedView{
+    min-width: 50%;
+  }
+
+  .contentToggleBtn{
+    min-width: 50%;
+  }
+  
+  .mainInputContainer{
+    width: 80%;
+    padding: 0px;
+  }
+
+  .mainInput{
+    font-size: 12px;
+  }
+  
+  .selectContainer{
+    width: 80%;
+    height: auto;
+    margin: 0px;
+  }
+
+  .css-b62m3t-container{
+    width: 100%;
+    margin: 0px;
+  }
+
+  .projIn{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 38px;
+    border-radius: 4px;
+    border: solid rgb(194, 194, 194) 1px;
+    box-sizing: border-box;
+  }
+  
+  
+  }

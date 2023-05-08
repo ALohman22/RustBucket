@@ -14,9 +14,9 @@ import './App.css';
 function App() {
 
   const authContext = useContext(AuthContext)
+  const [scratchPad, setScratchPad] = useState(false)
 
- const [scratchPad, setScratchPad] = useState(false)
- console.log(scratchPad)
+//  console.log(showAddComponent)
 
   return (
     <div className="App">
