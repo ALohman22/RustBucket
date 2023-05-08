@@ -2,6 +2,16 @@ const {User, Project, Component} = require('./models')
 
 
 module.exports = {
+    changeIsPublic: async (req,res) => {
+        try{
+            const {isPublic} = req.params
+          
+        } catch(err){
+            console.log('ERROR in changIsPublic')
+            console.log(err)
+        }
+    },
+
     addComp: async (req,res) => {
         try{
             const {componentImg, componentTitle, componentDiscription, componentPrice, projectId} = req.body

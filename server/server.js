@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const {sequelize} = require('./util/database')
 const {User, Project, Component} = require('./controllers/models')
-const {addComp, getComp, getAllComp, deleteComponent, getAllProjects, getUserProjects, getOneProject, deleteProject, addProject} = require('./controllers/PC')
+const {changeIsPublic, addComp, getComp, getAllComp, deleteComponent, getAllProjects, getUserProjects, getOneProject, deleteProject, addProject} = require('./controllers/PC')
 const { login, register } = require('./controllers/auth') 
 
 
@@ -21,7 +21,9 @@ server.post('/register', register)
 
 server.post('/projects', addProject)
 server.post('/components', addComp)
-// server.get('/userProjects/:id', getProject)
+
+server.put('/editPrivate/:isPublic', changeIsPublic)
+
 server.get('/projects', getAllProjects)
 server.get('/projects/:id', getOneProject)
 server.get('/userProjects/:id', getUserProjects)

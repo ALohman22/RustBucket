@@ -10,8 +10,6 @@ const[compArr,setCompArr] = useState([])
 const { state } = useContext(ComponentContext)
 const { state: st } = useContext(ProjectContext)
 
-console.log(st.currProj.isPublic)
-
 useEffect(()=> {
     axios.get(`http://localhost:3050/components/${id}`)
     .then(res=>{
@@ -32,7 +30,12 @@ const getTotal = () => {
 }
 
 const togglePublic = () => {
-    
+    const isPublic = !st.currProj.isPublic
+
+    axios.put(`http://localhost:3050/editPrivate/${isPublic}`)
+    .then(res=> {
+
+    }).catch(err=> console.log(err))
 }
 
     return (
