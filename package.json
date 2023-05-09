@@ -1,7 +1,6 @@
 {
   "name": "vehicle-builder",
   "version": "0.1.0",
-  "main": "./server/server.js",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -30,8 +29,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "go": "react-scripts start",
-    "start": "node ./server/server.js && npm build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

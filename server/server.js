@@ -9,7 +9,10 @@ const { login, register } = require('./controllers/auth')
 
 const server = express()
 
-server.use(express.static(`${__dirname}/public`))
+const _dirname = path.dirname("")
+const buildPath = path.join(_dirname  , "../RustBucket/build") 
+
+server.use(express.static(buildPath))
 // server.use(express.static(path.resolve(__dirname, "../build")))
 server.use(express.json())
 server.use(cors())
@@ -37,7 +40,12 @@ server.delete('/api/deleteProject/:id', deleteProject)
 server.delete('/api/deleteComponent/:id', deleteComponent)
 
 server.get('/*', function (req,res) {
-    res.sendFile(path.join(__dirname, '../public', 'index.html'))
+    res.sendFile(path.join(__dirname, '../ustBucket/build/index.html'),
+    function (err) {
+        if (err) {
+            res.status(500).send(err)
+        }
+    })
 })
 
 // const {PORT} = process.env

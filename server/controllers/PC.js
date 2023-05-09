@@ -63,7 +63,6 @@ module.exports = {
     getComp: async (req,res) => {
         try{
             const {id} = req.params
-            console.log(+id)
             const allComp = await Component.findAll({
                 where: {
                     projectId: +id
@@ -90,7 +89,6 @@ module.exports = {
     deleteComponent: async (req,res) => {
         try{
             const {id} = req.params
-            console.log(id)
             await Component.destroy({
                 where: {id: id}
             })
@@ -104,7 +102,6 @@ module.exports = {
     deleteProject: async (req, res) => {
         try{
             const {id} = req.params
-            console.log(id)
             await Project.destroy({
                 where: {id: id}
             })
