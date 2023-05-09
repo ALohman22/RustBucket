@@ -36,9 +36,9 @@ server.get('/api/components', getAllComp)
 server.delete('/api/deleteProject/:id', deleteProject)
 server.delete('/api/deleteComponent/:id', deleteComponent)
 
-// server.get('/*', function (req,res) {
-//     res.sendFile(path.join(__dirname, '../build', 'index.html'))
-// })
+server.get('/*', function (req,res) {
+    res.sendFile(path.join(__dirname, '../public'))
+})
 
 // const {PORT} = process.env
 
