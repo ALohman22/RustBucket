@@ -16,22 +16,22 @@ Project.belongsTo(User)
 Project.hasMany(Component)
 Component.belongsTo(Project)
 
-server.post('/login', login)
-server.post('/register', register)
+server.post('/api/login', login)
+server.post('/api/register', register)
 
-server.post('/projects', addProject)
-server.post('/components', addComp)
+server.post('/api/projects', addProject)
+server.post('/api/components', addComp)
 
-server.put('/editPrivate/:id', changeIsPublic)
+server.put('/api/editPrivate/:id', changeIsPublic)
 
-server.get('/projects', getAllProjects)
-server.get('/projects/:id', getOneProject)
-server.get('/userProjects/:id', getUserProjects)
-server.get('/components/:id', getComp)
-server.get('/components', getAllComp)
+server.get('/api/projects', getAllProjects)
+server.get('/api/projects/:id', getOneProject)
+server.get('/api/userProjects/:id', getUserProjects)
+server.get('/api/components/:id', getComp)
+server.get('/api/components', getAllComp)
 
-server.delete('/deleteProject/:id', deleteProject)
-server.delete('/deleteComponent/:id', deleteComponent)
+server.delete('/api/deleteProject/:id', deleteProject)
+server.delete('/api/deleteComponent/:id', deleteComponent)
 
 sequelize.sync()
 .then(() =>{
