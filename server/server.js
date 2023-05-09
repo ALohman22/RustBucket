@@ -35,6 +35,6 @@ server.delete('/api/deleteComponent/:id', deleteComponent)
 
 sequelize.sync()
 .then(() =>{
-    server.listen('http://3.144.128.21', () => console.log('Server is up on  port: 3050'))
+    server.listen(3050, () => console.log('Server is up on  port: 3050'))
 })
 .catch(err => console.log(err))
