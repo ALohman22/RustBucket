@@ -10,7 +10,7 @@ const AddComponentModel = ({comp}) => {
     const { dispatch } = useContext(ProjectContext)
 
 useEffect(()=> {
-    axios.get(`3.144.128.21/api/userProjects/${userId}`)
+    axios.get(`/api/userProjects/${userId}`)
     .then(res=> {
         setUserProj(res.data)
     }
@@ -36,7 +36,7 @@ const addComp = (comp, projId) => {
         projectId: +projId
     }
     
-    axios.post('/components', body)
+    axios.post('/api/components', body)
     .then(res => {
         
         dispatch({type:'PAGE_REFRESH'})

@@ -31,7 +31,7 @@ const handleSubmit = (e) => {
     }
     console.log(body)
 
-axios.post('3.144.128.21/api/projects', body)
+axios.post('/api/projects', body)
 .then(res => {
     setAddBool(!addBool)
     dispatch({type: 'SHOW_ADD_PROJECT'})
