@@ -1,8 +1,6 @@
-import { createContext, useState, useReducer } from "react";
+import { createContext, useState } from "react";
 
 let logoutTimer
-
-
 
 const AuthContext = createContext({
     token: '',
@@ -21,30 +19,17 @@ const calculateRemainingTime = (exp) => {
 const getLocalData = () => {
     const storedToken = localStorage.getItem('token')
     const storedExp = localStorage.getItem('exp')
-
     const remainingTime = calculateRemainingTime(storedExp)
-
     if (remainingTime <= 1000 * 60 * 30) {
         localStorage.removeItem('token')
         localStorage.removeItem('exp')
         return null
     }
-
     return{
         token: storedToken,
         duration: remainingTime,
     }
-
 }
-// let initialState = {
-//     token: '',
-//     login: () => {},
-//     logout: () => {},
-//     userId: null,
-// }
-
-
-// const AuthContext = createContext()
 
 export const AuthContextProvider = (props) => {
 
@@ -83,25 +68,6 @@ export const AuthContextProvider = (props) => {
         }
     }
 
-//     const reducer = (state, action) => {
-//         switch(action.type) {
-//             case "LOGIN":
-//                 return {}
-//             case "LOGOUT":
-//                 return {}
-//             default:
-//                 return state
-//         }
-//     }
-
-// const [state, dispatch] = useReducer(reducer, initialState)
-
-
-
-  
-
-
-
     const contextValue = {
         token,
         login,
@@ -115,5 +81,4 @@ export const AuthContextProvider = (props) => {
         </AuthContext.Provider>
     )
 }
-// export {AuthContextProvider}
 export default AuthContext

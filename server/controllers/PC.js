@@ -4,8 +4,19 @@ const {User, Project, Component} = require('./models')
 module.exports = {
     changeIsPublic: async (req,res) => {
         try{
-            const {isPublic} = req.params
-          
+            const {id} = req.params
+            const {isPublic} = req.body
+            await Project.update(
+            {
+                isPublic: isPublic
+            },
+            {
+                where: {
+                    id: id
+                }
+            },
+          )
+          res.sendStatus(200)
         } catch(err){
             console.log('ERROR in changIsPublic')
             console.log(err)

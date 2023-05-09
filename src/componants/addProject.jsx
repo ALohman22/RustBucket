@@ -16,7 +16,6 @@ const {dispatch} = useContext(ProjectContext)
     const [vehicleYear, setVehicleYear] = useState(null)
     const [vehicleMake, setVehicleMake] = useState('')
     const [vehicleModel, setVehicleModel] = useState('')
-    const [isPublic, setIsPublic] = useState(true)
 
 const handleSubmit = (e) => {
     e.preventDefault()
@@ -27,12 +26,12 @@ const handleSubmit = (e) => {
         vehicleModel,
         vehicleYear: vehicleYear.value,
         vehicleClass: vehicleClass.value,
-        isPublic,
+        isPublic: false,
         userId
     }
     console.log(body)
 
-axios.post('http://localhost:3050/projects', body)
+axios.post('/projects', body)
 .then(res => {
     setAddBool(!addBool)
     dispatch({type: 'SHOW_ADD_PROJECT'})

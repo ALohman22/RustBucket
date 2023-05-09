@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import ToggleScreenView from './ToggleScreenView'
 import AuthContext from '../state/AuthContext'
@@ -8,7 +8,7 @@ const HeaderLinks = ({scratchPad, setScratchPad}) => {
 
     const authCtx = useContext(AuthContext)
     const authToken = authCtx.token
-    const {state, dispatch } = useContext(ComponentContext) 
+    const { dispatch } = useContext(ComponentContext) 
 
     const toggleScratchPad = () => {
         setScratchPad(!scratchPad)

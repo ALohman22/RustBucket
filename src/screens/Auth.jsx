@@ -1,18 +1,11 @@
 import React, { useState, useContext, } from 'react'
-import { useNavigate } from 'react-router-dom'
 import AuthContext from "../state/AuthContext"
 import axios from 'axios'
-import ComponentContext from '../state/ComponentContext'
 import Swal from 'sweetalert2'
-
 
 const Auth = () => {
 
 const authContext = useContext(AuthContext)
-const {dispatch} = useContext(ComponentContext)
-
-const navigate = useNavigate()
-
 
 const [username, setUsername] = useState('')
 const [password, setPassword] = useState('')
@@ -21,14 +14,12 @@ const [register, setRegister] = useState(true)
 const submitHandler = (e) => {
    e.preventDefault()
 
-    const url = 'http://localhost:3050'
-
    const body = {
         username,
         password
     }
 
-axios.post(register ? `http://localhost:3050/login` : `http://localhost:3050/register`, body)
+axios.post(register ? `/login` : `/register`, body)
 .then(({data}) => {
     console.log('After Auth', data)
     authContext.login(data.exp, data.token, data.userId, data.username)  
@@ -51,11 +42,6 @@ const handleToggle = (e)=> {
     e.preventDefault()
     setRegister(!register)
 }
-
-// const nav = (e) => {
-//     e.preventDefault()
-//     navigate('/')
-// }
     
     return (
         <div className='mainAuth'>

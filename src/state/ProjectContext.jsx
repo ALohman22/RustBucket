@@ -32,6 +32,8 @@ const ProjectContextProvider = props => {
                 return {...state, scratchList: [...state.scratchList, action.payload]}
             case 'CLEAR_LIST':
                 return {...state, scratchList: []}
+            case 'CHANGE_PUBLIC':
+                return{...state, currProj: {...state.currProj, isPublic: !state.currProj.isPublic}}
             default:
                 return state
         }

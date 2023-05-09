@@ -7,10 +7,10 @@ import ProjectContext from '../state/ProjectContext'
 const AddComponentModel = ({comp}) => {
     const userId = localStorage.getItem('userId')
     const [userProj, setUserProj] = useState([])
-    const {state, dispatch} = useContext(ProjectContext)
+    const { dispatch } = useContext(ProjectContext)
 
 useEffect(()=> {
-    axios.get(`http://localHost:3050/userProjects/${userId}`)
+    axios.get(`/userProjects/${userId}`)
     .then(res=> {
         setUserProj(res.data)
     }
@@ -36,7 +36,7 @@ const addComp = (comp, projId) => {
         projectId: +projId
     }
     
-    axios.post('http://localhost:3050/components', body)
+    axios.post('/components', body)
     .then(res => {
         
         dispatch({type:'PAGE_REFRESH'})

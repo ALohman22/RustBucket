@@ -1,4 +1,4 @@
-import {useContext, useMemo} from 'react'
+import { useContext } from 'react'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import ComponentContext from '../state/ComponentContext'
@@ -19,7 +19,7 @@ const ComponentCard = ({comp}) => {
             reverseButtons: true,
            }).then((result) => {
             if(result.isConfirmed){
-                    axios.delete(`http://localhost:3050/deleteComponent/${id}`)
+                    axios.delete(`/deleteComponent/${id}`)
                     .then(()=>{
                         dispatch({type:'PAGE_REFRESH'})
                         Swal.fire(
@@ -35,7 +35,7 @@ const ComponentCard = ({comp}) => {
     return (
             <div className='componentsCard'>
                 <div className='compCardImg'>
-                <img className='cardImg' src={comp.componentImg} />
+                <img className='cardImg' src={comp.componentImg} alt='compImg'/>
                 </div>
                 <div className='compInfo'>
                 <h3>{comp.componentTitle}</h3>

@@ -21,7 +21,7 @@ const ProjectCard = ({project, setAddBool, addBool}) => {
             reverseButtons: true,
            }).then((result) => {
             if(result.isConfirmed){
-                    axios.delete(`http://localhost:3050/deleteProject/${id}`)
+                    axios.delete(`/deleteProject/${id}`)
                     .then(
                         setAddBool(!addBool)
                     ).catch(err=> console.log(err))

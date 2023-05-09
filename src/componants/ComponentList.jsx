@@ -7,15 +7,15 @@ import ProjectContext from '../state/ProjectContext'
 
 const ComponentList = ({ id }) => {
 const[compArr,setCompArr] = useState([])
-const { state } = useContext(ComponentContext)
-const { state: st } = useContext(ProjectContext)
+const { state, dispatch } = useContext(ComponentContext)
+const { state: st, dispatch: dis } = useContext(ProjectContext)
 
 useEffect(()=> {
-    axios.get(`http://localhost:3050/components/${id}`)
+    axios.get(`/components/${id}`)
     .then(res=>{
         setCompArr(res.data)
     }).catch(err=> console.log(err))
-},[state.toggle])
+},[state.toggle, dispatch, id])
 
 const mapComponents = compArr.map(comp=> {
     return <ComponentCard key={comp.id} comp={comp} />
@@ -24,7 +24,7 @@ const mapComponents = compArr.map(comp=> {
 const getTotal = () => {
     let priceArr = []
     compArr.map(comp => {
-        priceArr.push(+comp.componentPrice)
+       return priceArr.push(+comp.componentPrice)
     })
     return Math.round(priceArr.reduce((acc, curr)=> acc + curr, 0) * 100) / 100
 }
@@ -32,10 +32,11 @@ const getTotal = () => {
 const togglePublic = () => {
     const isPublic = !st.currProj.isPublic
 
-    axios.put(`http://localhost:3050/editPrivate/${isPublic}`)
+    axios.put(`/editPrivate/${id}`, {isPublic})
     .then(res=> {
-
-    }).catch(err=> console.log(err))
+        dis({type:'CHANGE_PUBLIC'})
+    })
+    .catch(err=> console.log(err))
 }
 
     return (

@@ -1,8 +1,6 @@
 import { useState, useContext } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import AuthContext from './state/AuthContext'
-
-
 import Auth from './screens/Auth'
 import Header from './componants/Header'
 import MyProjects from './screens/MyProjects'
@@ -15,8 +13,6 @@ function App() {
 
   const authContext = useContext(AuthContext)
   const [scratchPad, setScratchPad] = useState(false)
-
-//  console.log(showAddComponent)
 
   return (
     <div className="App">

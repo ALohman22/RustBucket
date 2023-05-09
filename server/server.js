@@ -22,7 +22,7 @@ server.post('/register', register)
 server.post('/projects', addProject)
 server.post('/components', addComp)
 
-server.put('/editPrivate/:isPublic', changeIsPublic)
+server.put('/editPrivate/:id', changeIsPublic)
 
 server.get('/projects', getAllProjects)
 server.get('/projects/:id', getOneProject)

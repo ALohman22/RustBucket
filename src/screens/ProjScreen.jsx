@@ -1,5 +1,4 @@
 import React, {useContext, useState, useEffect } from 'react'
-// import ProjectContext from '../state/ProjectContext'
 import ComponentList from '../componants/ComponentList'
 import { useParams } from 'react-router-dom'
 import AddComponent from '../componants/addComponent'
@@ -7,9 +6,7 @@ import axios from 'axios'
 import ComponentContext from '../state/ComponentContext'
 import ProjectContext from '../state/ProjectContext'
 
-
 const ProjScreen = () => {
-
 
 const [toggle, setToggle] = useState(true)
 const {id} = useParams()
@@ -17,14 +14,12 @@ const {state, dispatch} = useContext(ComponentContext)
 const {state: st,dispatch: dis} = useContext(ProjectContext)
 
 useEffect(()=> {
-    axios.get(`http://localhost:3050/projects/${id}`)
+    axios.get(`/projects/${id}`)
     .then(res=>{
-        // console.log(res.data)
         dispatch({type:'TOGGLE', payload: 'project'})
         dis({type: 'CURR_PROJ', payload: res.data[0]})
     }).catch(err=> console.log(err))
-},[id])
-
+},[id, dis, dispatch])
 
 const showInput = () => {
     if(state?.showAddComponent){

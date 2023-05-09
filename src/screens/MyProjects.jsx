@@ -1,6 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react'
-// import Select from 'react-select'
-// import AuthContext from '../state/AuthContext'
 import axios from 'axios'
 import ProjectList from '../componants/ProjectList'
 import ProjectContext from '../state/ProjectContext'
@@ -16,15 +14,14 @@ const MyProjects = () => {
     const [projArr, setProjArr] = useState([])
 
     useEffect(()=> {
-        axios.get(`http://localhost:3050/userProjects/${userId}`)
+        axios.get(`/userProjects/${userId}`)
         .then(res => {
             dispatch({type: 'GET_ALL', payload: res.data})
             dis({type:'TOGGLE', payload: 'myProjects'})
             setProjArr(res.data)
     })
         .catch(err=> console.log(err))
-    },[addBool])
-
+    },[addBool, dis, dispatch, userId])
 
     return (
         <div className='mainProjects'>

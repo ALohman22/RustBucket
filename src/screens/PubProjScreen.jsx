@@ -7,21 +7,16 @@ import axios from 'axios'
 
 
 const PubProjScreen = () => {
-const [componentImg, setComponentImg] = useState('')
-const [componentTitle, setComponentTitle] = useState('')
-const [componentDiscription, setComponentDiscription] = useState('')
-const [componentPrice, setComponentPrice] = useState('')
 const [currProj, setCurrProj] = useState({})
-const [toggle, setToggle] = useState(true)
 const {id} = useParams()
-const {state, dispatch} = useContext(ProjectContext)
+const {state} = useContext(ProjectContext)
 
 useEffect(()=> {
-    axios.get(`http://localhost:3050/projects/${id}`)
+    axios.get(`/projects/${id}`)
     .then(res=>{
         setCurrProj(res.data[0])
     }).catch(err=> console.log(err))
-},[])
+},[id])
 
 const presentModel = (comp) => {
     
@@ -45,10 +40,10 @@ const presentModel = (comp) => {
                         <h2>Year: {currProj.vehicleYear}</h2>
                     </div>
                     <div className='projectScreenImg'>
-                        <img className='projectScreenImg2' src={currProj.projectImg}/>
+                        <img className='projectScreenImg2' src={currProj.projectImg} alt='projImg'/>
                     </div>
            
-                <PubComponentList id={id} toggle={toggle}/>
+                <PubComponentList id={id}/>
             </div>
         </div>
     )

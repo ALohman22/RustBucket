@@ -8,7 +8,6 @@ import AddComponentModel from '../componants/AddComponentModel'
 import {MdSearch} from 'react-icons/md'
 import Select from 'react-select'
 import axios from 'axios'
-import ComponentContext from '../state/ComponentContext'
 
 const Main = ({scratchPad}) => {
 
@@ -16,32 +15,27 @@ const Main = ({scratchPad}) => {
     const [vehicleClass, setVehicleClass] = useState({value:"all", label: "All"})
     const [allProjects, setAllProjects] = useState([])
     const [allComp, setAllComp] = useState([])
-    const [currentComp, setCurrentComp] = useState({})
     const [curInput, setCurInput] = useState('')
-    const [showModel,setShowModel] = useState(false)
+
     
     const Projects = useContext(ProjectContext)
     const projArr = Projects.state.projects
     const {state, dispatch } = useContext(ProjectContext)
-    const {dispatch: dis} = useContext(ComponentContext)
-const handleClass = (e) => {
-    setVehicleClass(e.target.value)
-}
 
 useEffect(()=> {
-    axios.get('http://localhost:3050/projects')
+    axios.get('/projects')
     .then(res => {
         dispatch({type: 'GET_ALL', payload: res.data})
         dispatch({type: 'TOGGLE', payload: 'home'})
         setAllProjects(projArr)
 }).catch(err=> console.log(err))
 
-    axios.get('http://localhost:3050/components')
+    axios.get('/components')
     .then(res=> {
     setAllComp(res.data)
 }).catch(err=> console.log(err))
 
-},[])
+},[dispatch])
 
 const filterProjects = useMemo(()=> {
     if(vehicleClass?.value === "all" && curInput === '') {
@@ -97,8 +91,6 @@ const filterCopies = [...new Map(allComp.map((comp) => [comp.componentTitle, com
 const handleAdd = (comp) => {
     dispatch({type:'SHOW_MODEL'})
     dispatch({type:'CURR_COMP', payload: comp})
-    // setShowModel(true)
-    // setCurrentComp(comp)
    }
 
 const allComponents = filterCopies.map((comp) => {
