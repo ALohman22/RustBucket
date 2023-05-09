@@ -19,7 +19,7 @@ const submitHandler = (e) => {
         password
     }
 
-axios.post(register ? `/login` : `/register`, body)
+axios.post(register ? `/api/login` : `/api/register`, body)
 .then(({data}) => {
     console.log('After Auth', data)
     authContext.login(data.exp, data.token, data.userId, data.username)  

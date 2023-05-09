@@ -19,7 +19,7 @@ const ComponentCard = ({comp}) => {
             reverseButtons: true,
            }).then((result) => {
             if(result.isConfirmed){
-                    axios.delete(`/deleteComponent/${id}`)
+                    axios.delete(`/api/deleteComponent/${id}`)
                     .then(()=>{
                         dispatch({type:'PAGE_REFRESH'})
                         Swal.fire(
