@@ -32,7 +32,8 @@ useEffect(()=> {
 
     axios.get('/api/components')
     .then(res=> {
-    setAllComp(res.data)
+        console.log(res.data)
+    // setAllComp(res.data)
 }).catch(err=> console.log(err))
 
 },[dispatch])
