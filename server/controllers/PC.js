@@ -79,8 +79,8 @@ module.exports = {
 
     getAllComp: async (req,res) => {
         try{
-            // const allComp = await Component.findAll()
-            res.status(200).send('something')
+            const allComp = await Component.findAll()
+            res.status(200).send(allComp)
         } catch(err) {
             console.log('ERROR in getAllComp')
             console.log(err)
