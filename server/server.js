@@ -40,7 +40,7 @@ server.delete('/api/deleteProject/:id', deleteProject)
 server.delete('/api/deleteComponent/:id', deleteComponent)
 
 server.get('/*', function (req,res) {
-    res.sendFile(path.join(__dirname, '../ustBucket/build/index.html'),
+    res.sendFile(path.join(__dirname, '../RustBucket/build/index.html'),
     function (err) {
         if (err) {
             res.status(500).send(err)
