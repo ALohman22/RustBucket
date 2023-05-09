@@ -23,14 +23,14 @@ const Main = ({scratchPad}) => {
     const {state, dispatch } = useContext(ProjectContext)
 
 useEffect(()=> {
-    axios.get('/api/projects')
+    axios.get('/projects')
     .then(res => {
         dispatch({type: 'GET_ALL', payload: res.data})
         dispatch({type: 'TOGGLE', payload: 'home'})
         setAllProjects(projArr)
 }).catch(err=> console.log(err))
 
-    axios.get('/api/components')
+    axios.get('/components')
     .then(res=> {
     setAllComp(res.data)
 }).catch(err=> console.log(err))
