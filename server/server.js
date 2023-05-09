@@ -19,8 +19,8 @@ Component.belongsTo(Project)
 server.post('/api/login', login)
 server.post('/api/register', register)
 
-server.post('/api/projects', addProject)
-server.post('/api/components', addComp)
+server.post('/api/projects/', addProject)
+server.post('/api/components/', addComp)
 
 server.put('/api/editPrivate/:id', changeIsPublic)
 
