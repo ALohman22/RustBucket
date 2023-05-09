@@ -12,7 +12,7 @@ const {id} = useParams()
 const {state} = useContext(ProjectContext)
 
 useEffect(()=> {
-    axios.get(`/api/projects/${id}`)
+    axios.get(`3.144.128.21/api/projects/${id}`)
     .then(res=>{
         setCurrProj(res.data[0])
     }).catch(err=> console.log(err))

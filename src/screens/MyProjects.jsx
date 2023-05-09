@@ -14,7 +14,7 @@ const MyProjects = () => {
     const [projArr, setProjArr] = useState([])
 
     useEffect(()=> {
-        axios.get(`/api/userProjects/${userId}`)
+        axios.get(`3.144.128.21/api/userProjects/${userId}`)
         .then(res => {
             dispatch({type: 'GET_ALL', payload: res.data})
             dis({type:'TOGGLE', payload: 'myProjects'})

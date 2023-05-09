@@ -14,7 +14,7 @@ const {state, dispatch} = useContext(ComponentContext)
 const {state: st,dispatch: dis} = useContext(ProjectContext)
 
 useEffect(()=> {
-    axios.get(`/api/projects/${id}`)
+    axios.get(`3.144.128.21/api/projects/${id}`)
     .then(res=>{
         dispatch({type:'TOGGLE', payload: 'project'})
         dis({type: 'CURR_PROJ', payload: res.data[0]})

@@ -32,7 +32,7 @@ const getTotal = () => {
 const togglePublic = () => {
     const isPublic = !st.currProj.isPublic
 
-    axios.put(`/api/editPrivate/${id}`, {isPublic})
+    axios.put(`3.144.128.21/api/editPrivate/${id}`, {isPublic})
     .then(res=> {
         dis({type:'CHANGE_PUBLIC'})
     })

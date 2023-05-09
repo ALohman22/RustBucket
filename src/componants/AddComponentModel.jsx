@@ -10,7 +10,7 @@ const AddComponentModel = ({comp}) => {
     const { dispatch } = useContext(ProjectContext)
 
 useEffect(()=> {
-    axios.get(`/api/userProjects/${userId}`)
+    axios.get(`3.144.128.21/api/userProjects/${userId}`)
     .then(res=> {
         setUserProj(res.data)
     }
