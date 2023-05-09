@@ -8,6 +8,7 @@ const { login, register } = require('./controllers/auth')
 
 const server = express()
 
+app.use(express.static(`${__dirname}/src`))
 server.use(express.json())
 server.use(cors())
 
