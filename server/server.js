@@ -8,7 +8,7 @@ const { login, register } = require('./controllers/auth')
 
 const server = express()
 
-server.use(express.static(`${RustBucket}/public`))
+server.use(express.static(`${__dirname}/public`))
 server.use(express.json())
 server.use(cors())
 
