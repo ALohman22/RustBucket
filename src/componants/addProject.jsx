@@ -31,7 +31,7 @@ const handleSubmit = (e) => {
     }
     console.log(body)
 
-axios.post('/api/projects', body)
+axios.post('http://localhost:3050/api/projects', body)
 .then(res => {
     setAddBool(!addBool)
     dispatch({type: 'SHOW_ADD_PROJECT'})

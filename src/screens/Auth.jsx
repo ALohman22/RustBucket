@@ -1,12 +1,14 @@
 import React, { useState, useContext, } from 'react'
 import AuthContext from "../state/AuthContext"
+
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import ComponentContext from '../state/ComponentContext'
 
 const Auth = () => {
 
 const authContext = useContext(AuthContext)
-
+const {dispatch} = useContext(ComponentContext)
 const [username, setUsername] = useState('')
 const [password, setPassword] = useState('')
 const [register, setRegister] = useState(true)
@@ -19,12 +21,13 @@ const submitHandler = (e) => {
         password
     }
 
-axios.post(register ? `/api/login` : `/api/register`, body)
+axios.post(register ? `http://localhost:3050/api/login` : `http://localhost:3050/api/register`, body)
 .then(({data}) => {
     console.log('After Auth', data)
     authContext.login(data.exp, data.token, data.userId, data.username)  
     setPassword('')
     setUsername('')
+    dispatch({type: 'TOGGLE', payload: 'home'})
 
 })
 .catch(err=> {

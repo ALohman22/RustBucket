@@ -9,7 +9,7 @@ const[compArr,setCompArr] = useState([])
 const {state} = useContext(ComponentContext)
 
     useEffect(()=> {
-        axios.get(`/api/components/${id}`)
+        axios.get(`http://localhost:3050/api/components/${id}`)
         .then(res=>{
             setCompArr(res.data)
         }).catch(err=> console.log(err))

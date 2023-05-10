@@ -11,7 +11,7 @@ const { state, dispatch } = useContext(ComponentContext)
 const { state: st, dispatch: dis } = useContext(ProjectContext)
 
 useEffect(()=> {
-    axios.get(`/api/components/${id}`)
+    axios.get(`http://localhost:3050/api/components/${id}`)
     .then(res=>{
         setCompArr(res.data)
     }).catch(err=> console.log(err))
@@ -32,7 +32,7 @@ const getTotal = () => {
 const togglePublic = () => {
     const isPublic = !st.currProj.isPublic
 
-    axios.put(`/api/editPrivate/${id}`, {isPublic})
+    axios.put(`http://localhost:3050/api/editPrivate/${id}`, {isPublic})
     .then(res=> {
         dis({type:'CHANGE_PUBLIC'})
     })

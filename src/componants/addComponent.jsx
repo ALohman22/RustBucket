@@ -22,7 +22,7 @@ const AddComponent = ({id}) => {
         }
         console.log(body)
     
-        axios.post('/api/components', body)
+        axios.post('http://localhost:3050/api/components', body)
         .then(()=>{
             setComponentImg('')
             setComponentTitle('')
